@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ASDrestart.iml" filepath="$PROJECT_DIR$/ASDrestart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hw2sorting/hw2sorting.iml" filepath="$PROJECT_DIR$/hw2sorting/hw2sorting.iml" />
     </modules>
   </component>
 </project>
