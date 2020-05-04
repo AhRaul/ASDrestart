@@ -1,12 +1,12 @@
 public class Stack {
 
     private int maxSize;
-    private int[] stack;
+    private String[] stack;
     private int top;
 
     public Stack(int maxSize) {
         this.maxSize = maxSize;
-        this.stack = new int[this.maxSize];
+        this.stack = new String[this.maxSize];
         this.top = -1;
     }
 
@@ -18,15 +18,29 @@ public class Stack {
         return (this.top == this.maxSize - 1);
     }
 
-    public void push(int i) {
+    public void push(String i) {
         this.stack[++this.top] = i;
     }
 
-    public int peekAndDelete() {
+    public String peekAndDelete() {
         return this.stack[this.top--];
     }
 
-    public int peek() {
+    public String peek() {
         return this.stack[this.top];
+    }
+
+    public void pushString(String string) {
+        char[] strToArray = string.toCharArray();
+        for(int i = 0; i<strToArray.length; i++) {
+            push(String.valueOf(strToArray[i]));
+        }
+    }
+
+    public void displayMirrorString() {
+        int lengthSring = top;
+        for(int i = 0; i <= lengthSring; i++) {
+            System.out.print(peekAndDelete());
+        }
     }
 }
