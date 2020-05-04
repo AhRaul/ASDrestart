@@ -32,11 +32,10 @@ public class Deque {
         this.items++;
     }
 
-    //TODO NEED TEST
     public void insertRight(int i) {
-        if(this.right == this.maxSize-1)
-            this.right = -1;
-        this.deque[++this.right] = i;
+        if(this.right == 0)
+            this.right = maxSize;
+        this.deque[--this.right] = i;
         this.items++;
     }
 
@@ -48,11 +47,10 @@ public class Deque {
         return temp;
     }
 
-    //TODO NEED TEST
     public long peekAndRemoveLeft() {
+        if(this.left == -1)
+            this.left = maxSize-1;
         int temp = this.deque[this.left--];
-        if(this.left == 0)
-            this.left = maxSize;
         this.items--;
         return temp;
     }
