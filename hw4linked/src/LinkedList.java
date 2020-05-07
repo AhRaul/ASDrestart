@@ -58,7 +58,7 @@ public class LinkedList {
     public Link delete(String name) {
         Link current = first;
         Link previous = first;
-        while (current.name != null) {
+        while (current.name != name) {
             if (current.next == null) {
                 return null;
             } else {
