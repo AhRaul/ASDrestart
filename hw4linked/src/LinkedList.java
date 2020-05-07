@@ -1,43 +1,75 @@
-public class LinkedList<T> {
-    private Link<T> first;
+public class LinkedList {
+    public Link first;
+    public Link last;
 
     public LinkedList() {
         first = null;
+        last = null;
     }
 
     public boolean isEmpty() {
         return (first == null);
     }
 
-    public void insert(T link) {
-        Link<T> li = new Link(link);
-        li.setNext(first);
-        this.first = li;
+    public void insert(String name, int age) {
+        Link newLink = new Link(name, age);
+        if(this.isEmpty())
+            last = newLink;
+        newLink.next = first;
+        first = newLink;
     }
 
-    public Link<T> delete() {
-        Link<T> temp = first;
-        first = first.getNext();
+    public void insertLast(String name, int age) {
+        Link newLink = new Link(name, age);
+        if(this.isEmpty())
+            first = newLink;
+        else last.next = newLink;
+        last = newLink;
+    }
+
+    public Link delete() {
+
+        Link temp = first;
+        if(first.next == null)
+            last = null;
+        first = first.next;
         return temp;
     }
 
     public void display() {
-        Link<T> current = first;
+        Link current = first;
         while (current != null) {
-            System.out.println(current.getLink());
-            current = current.getNext();
+            current.display();
+            current = current.next;
         }
     }
 
-    public T find (T searchNode) {
-        Link<T> findNode = new Link<>(searchNode);
-        Link<T> current = first;
-        while (current != null) {
-            if (current.getLink().equals(findNode.getLink())) {
-                return findNode.getLink();
-            }
-            current = current.getNext();
+    public Link find (String name) {
+        Link current = first;
+        while (current.name != name) {
+            if(current.next == null)
+                return null;
+            else
+                current = current.next;
         }
-        return null;
+        return current;
+    }
+
+    public Link delete(String name) {
+        Link current = first;
+        Link previous = first;
+        while (current.name != null) {
+            if (current.next == null) {
+                return null;
+            } else {
+                previous = current;
+                current = current.next;
+            }
+        }
+        if(current == first)
+            first = first.next;
+        else
+            previous.next = current.next;
+        return current;
     }
 }

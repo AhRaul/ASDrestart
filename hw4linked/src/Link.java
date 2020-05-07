@@ -1,20 +1,15 @@
 public class Link<T> {
-    public T link;
-    public Link<T> next;
+    public String name;
+    public int age;
 
-    public Link (T link) {
-        this.link = link;
+    public Link next;
+
+    public Link (String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 
-    public Link<T> getNext() {
-        return next;
-    }
-
-    public void setNext(Link<T> next) {
-        this.next = next;
-    }
-
-    public T getLink() {
-        return link;
+    public void display () {
+        System.out.println("Name: " + this.name + ", age: " + this.age);
     }
 }
