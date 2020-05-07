@@ -10,6 +10,16 @@ public class LinkIteratorApp {
         itr.insertAfter("Artem", 20);
         itr.insertBefore("Sergey", 10);
 
+        itr.reset();
+
+        itr.insertBefore("MrX", 20);
+        System.out.println(itr.atEnd());
+        itr.nextLink();
+        itr.nextLink();
+        System.out.println(itr.atEnd());
+
+        itr.deleteCurrent();
         list.display();
+
     }
 }
