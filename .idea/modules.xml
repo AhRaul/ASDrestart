@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/hw3Stack/hw3Stack.iml" filepath="$PROJECT_DIR$/hw3Stack/hw3Stack.iml" />
       <module fileurl="file://$PROJECT_DIR$/hw4linked/hw4linked.iml" filepath="$PROJECT_DIR$/hw4linked/hw4linked.iml" />
       <module fileurl="file://$PROJECT_DIR$/hw5recursion/hw5recursion.iml" filepath="$PROJECT_DIR$/hw5recursion/hw5recursion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hw6tree/hw6tree.iml" filepath="$PROJECT_DIR$/hw6tree/hw6tree.iml" />
     </modules>
   </component>
 </project>
