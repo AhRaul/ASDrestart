@@ -4,11 +4,13 @@ public class Tree {
     private Node root;
     public static final int MAX_LEWEL = 4;
     private boolean levelIsLimit = false;
+    private int levelCounter = 0;
+    private boolean isBalanced = true;
 
-    public Node find(int key) {
+    public Node find(int value) {
         Node current = root;
-        while (current.value != key) {
-            if(key < current.value) {
+        while (current.value != value) {
+            if(value < current.value) {
                 current = current.leftChild;
             } else {
                 current = current.rightChild;
@@ -187,5 +189,53 @@ public class Tree {
         }
     }
 
+    //сравнение двух максимальных веток рассматриваемого корня
+    public void compareTwoBranches(Node rootNode) {
+        int leftMaxLevelCounter = rootNode.level;
+        int rightMaxLevelCounter = rootNode.level;
+        this.levelCounter = 0;
 
+        if(rootNode.leftChild != null) {
+            inOrderFindMaxBranch(rootNode.leftChild);
+            leftMaxLevelCounter = levelCounter;
+        }
+
+        this.levelCounter = 0;
+        if(rootNode.rightChild != null) {
+            inOrderFindMaxBranch(rootNode.rightChild);
+            rightMaxLevelCounter = levelCounter;
+        }
+
+        if(leftMaxLevelCounter+1 < rightMaxLevelCounter || leftMaxLevelCounter > rightMaxLevelCounter+1 || !isBalanced) {
+            isBalanced = false;
+        }
+    }
+
+    //поиск максимальной длины ветки рассматриваемого корня
+    private void inOrderFindMaxBranch(Node rootNode) {
+        if(rootNode != null) {
+            inOrderFindMaxBranch(rootNode.leftChild);
+            if (this.levelCounter < rootNode.level) {
+                this.levelCounter = rootNode.level;
+            }
+            inOrderFindMaxBranch(rootNode.rightChild);
+        }
+    }
+
+    //проход по всем корням со сравнением максимальных ветвей.
+    private void inOrderCompareAllBranches(Node rootNode) {
+        if(rootNode != null && isBalanced) {            //проверка isBalanced здесь для уменьшения количества операций,
+                                                        // если найден хоть один не сбалансированный корень
+            inOrderCompareAllBranches(rootNode.leftChild);
+            compareTwoBranches(rootNode);
+            inOrderCompareAllBranches(rootNode.rightChild);
+        }
+    }
+
+    //запуск определения сбалансированности всех корней
+    public boolean isBalanced() {
+        isBalanced = true;              //на случай, если проверка будет проходить после внесения изменений в древо
+        inOrderCompareAllBranches(root);
+        return isBalanced;
+    }
 }
