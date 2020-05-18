@@ -1,14 +1,14 @@
 public class Vertex {
     public String label;
-    public int numLine;
-    public int level;
+    public int numLine;          //номер пути
+    public int level;            //глубина
 
     public boolean wasVisited;
 
     public Vertex(String label) {
         this.label = label;
         this.wasVisited = false;
-        this.numLine = 0;
+        this.numLine = -1;
         this.level = 0;
     }
 }

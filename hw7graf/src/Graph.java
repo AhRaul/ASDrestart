@@ -77,13 +77,14 @@ public class Graph {
      *
      * @param end конечная точка, до которой идёт поиск короткого пути
      */
-    public int bfsFindShortest(int end) {
+    public void bfsFindShortest(int end) {
 //        displayVertex((0));
 
         queue.insert(0);                                //Вставка в конец очереди
         int v2;                                            //Потомок за v1
 
         int numLine=0;
+        vertexList[0].numLine=0;
         int[][] buildLines = new int[size][size];                  //[номер линии][адрес ячейки] переменная содержит vertexList индексы
         while ((v2 = getAdjUnvisitedVertex(0)) != -1) {
             vertexList[v2].wasVisited = true;           //Пометка
@@ -103,7 +104,8 @@ public class Graph {
                 }
 //                displayVertex(v2);                          //Вывод
                 if(v2 == end) {
-                    return vertexList[v2].numLine;
+                    displayShortestWay(vertexList[v2].numLine);
+                    return;
                 }
                 queue.insert(v2);
             }
@@ -111,7 +113,16 @@ public class Graph {
 
         for (int i=0; i<size; i++)                          //Сброс флагов
             vertexList[i].wasVisited = false;
-        return - 1;
+        return;
+    }
+
+    public void displayShortestWay(int numLine) {
+        System.out.println(vertexList[0].label);
+        for (int i = 1; i < size; i++) {
+            if(vertexList[i].numLine == numLine) {
+                System.out.println(vertexList[i].label);
+            }
+        }
     }
 
     public void addVertex(String label) {

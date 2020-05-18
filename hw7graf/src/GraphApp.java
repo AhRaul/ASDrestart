@@ -29,7 +29,7 @@ public class GraphApp {
         graph.addEdge(8, 9);
         graph.addEdge(9, 3);
 
-        System.out.println("Самый короткий путь, это путь №" + (graph.bfsFindShortest(3)+1));
+        graph.bfsFindShortest(3);
 
     }
 }
