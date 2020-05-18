@@ -20,6 +20,7 @@ public class Graph {
     }
 
     private int getAdjUnvisitedVertex(int ver) {
+        int numLine = 0;
         for(int i = 0; i < size; i++) {
             if(adjMat[ver][i] == 1 && vertexList[i].wasVisited == false) {
                 return i;                                                   //возвращает потомка
@@ -27,8 +28,6 @@ public class Graph {
         }
         return -1;
     }
-
-
 
     /**
      * Обход графа в глубину
@@ -78,38 +77,41 @@ public class Graph {
      *
      * @param end конечная точка, до которой идёт поиск короткого пути
      */
-    public void bfsFindShortest(int end) {
-        vertexList[0].wasVisited = true;
-        displayVertex((0));                                //Вывод развилки
+    public int bfsFindShortest(int end) {
+//        displayVertex((0));
+
         queue.insert(0);                                //Вставка в конец очереди
         int v2;                                            //Потомок за v1
-        int nRoad = 0;
 
-        Queue[] possibleRoads = new Queue[MAX_VERTS];
+        int numLine=0;
+        int[][] buildLines = new int[size][size];                  //[номер линии][адрес ячейки] переменная содержит vertexList индексы
+        while ((v2 = getAdjUnvisitedVertex(0)) != -1) {
+            vertexList[v2].wasVisited = true;           //Пометка
+            vertexList[v2].numLine=numLine++;
+        }
+        for (int i=0; i<size; i++)                          //Сброс флагов
+            vertexList[i].wasVisited = false;
+        vertexList[0].wasVisited = true;
 
         while (!queue.isEmpty()) {
             int v1 = queue.remove();                        //Родитель перед v2
-            if(getAdjUnvisitedVertex(v1) != -1) {
-                nRoad=0;
-            }
+
             while ((v2 = getAdjUnvisitedVertex(v1)) != -1) {        //обход по уровню
                 vertexList[v2].wasVisited = true;           //Пометка
-//                displayVertex(v2);                          //Вывод
-                possibleRoads[nRoad].insert(v2);
-                queue.insert(v2);
-
-                if(v2 == end) {
-                    while (!possibleRoads[nRoad].isEmpty()) {
-                        displayVertex(possibleRoads[nRoad].remove());
-                    }
-                    return;
+                if(v1 != 0) {
+                    vertexList[v2].numLine=vertexList[v1].numLine;
                 }
-                ++nRoad;
+//                displayVertex(v2);                          //Вывод
+                if(v2 == end) {
+                    return vertexList[v2].numLine;
+                }
+                queue.insert(v2);
             }
         }
 
         for (int i=0; i<size; i++)                          //Сброс флагов
             vertexList[i].wasVisited = false;
+        return - 1;
     }
 
     public void addVertex(String label) {
