@@ -29,6 +29,7 @@ public class GraphApp {
         graph.addEdge(8, 9);
         graph.addEdge(9, 3);
 
-        graph.bfs();
+        graph.bfsFindShortest(3);
+
     }
 }
